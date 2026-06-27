@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Ukubona · Old Timerz · 27 Jun 2026</title>
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+
+<style>
+/* ══ TOKENS ══ */
+:root {
+  --bg0:#0a0a08; --bg1:#111110; --bg2:#1c1c1a; --bg3:#252522;
+  --border:rgba(255,255,255,0.07);
+  --border-md:rgba(255,255,255,0.14);
+  --text0:#f5f2eb; --text1:#b8b3a8; --text2:#706b62; --text3:#3d3933;
+  --amber:#c8921a; --amber-d:rgba(200,146,26,0.10); --amber-b:rgba(200,146,26,0.25);
+  --amber-bright:#e0a82e;
+  --green:#2d6e4e; --green-d:rgba(45,110,78,0.12); --green-b:rgba(45,110,78,0.30);
+  --pulse-color:var(--amber-bright);
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono','Fira Mono',monospace;
+  --max:820px;
+  --gut:2rem;
+}
+[data-theme="light"] {
+  --bg0:#f0ede5; --bg1:#ffffff; --bg2:#e8e4db; --bg3:#ddd9cf;
+  --border:rgba(0,0,0,0.07);
+  --border-md:rgba(0,0,0,0.14);
+  --text0:#18160f; --text1:#47433a; --text2:#857f74; --text3:#bdb8ae;
+  --amber:#8a5e08; --amber-d:rgba(138,94,8,0.08); --amber-b:rgba(138,94,8,0.22);
+  --amber-bright:#8a5e08;
+  --green:#1a5c3a; --green-d:rgba(26,92,58,0.08); --green-b:rgba(26,92,58,0.22);
+}
+
+/* ══ RESET ══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:var(--sans);
+  background:var(--bg0);
+  color:var(--text0);
+  line-height:1.76;
+  -webkit-font-smoothing:antialiased;
+  transition:background .3s,color .3s;
+  min-height:100vh;
+}
+
+/* ══ NAV ══ */
+.nav{
+  position:sticky;top:0;z-index:500;
+  background:var(--bg0);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(14px);
+}
+.nav-inner{
+  max-width:var(--max);margin:0 auto;padding:0 var(--gut);
+  height:54px;display:flex;align-items:center;gap:.8rem;
+}
+.logo-wrap{width:30px;height:30px;flex-shrink:0;position:relative;}
+.logo-wrap img{
+  width:100%;height:100%;object-fit:contain;
+  position:absolute;top:0;left:0;
+  transition:opacity .4s;
+  animation:spin 120s linear infinite;
+}
+.logo-dark{opacity:1;} .logo-light{opacity:0;}
+[data-theme="light"] .logo-dark{opacity:0;} [data-theme="light"] .logo-light{opacity:1;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media(prefers-reduced-motion:reduce){.logo-wrap img{animation:none;}}
+.nav-title{
+  font-family:var(--serif);font-size:.92rem;
+  color:var(--text0);flex:1;letter-spacing:-.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.nav-sub{
+  font-family:var(--mono);font-size:.52rem;
+  color:var(--text2);letter-spacing:.07em;margin-left:.4rem;
+}
+.theme-btn{
+  background:var(--bg2);border:1px solid var(--border-md);
+  border-radius:20px;padding:.22rem .75rem;
+  font-family:var(--mono);font-size:.55rem;color:var(--text1);
+  cursor:pointer;letter-spacing:.06em;flex-shrink:0;
+  transition:background .2s,color .2s;
+}
+.theme-btn:hover{background:var(--bg3);color:var(--text0);}
+
+/* ══ SIGNAL LINE ══ */
+.signal-container{
+  width:100%;max-width:var(--max);
+  margin:0 auto;padding:0 var(--gut);
+  position:relative;height:40px;overflow:visible;
+}
+.signal-svg{width:100%;height:40px;display:block;}
+
+/* ══ LAYOUT ══ */
+.outer{max-width:var(--max);margin:0 auto;padding:0 var(--gut) 5rem;}
+
+/* ══ HEADER ══ */
+.page-header{
+  padding:3.5rem 0 2.5rem;
+  border-bottom:1px solid var(--border);
+}
+.eyebrow{
+  font-family:var(--mono);font-size:.56rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text2);margin-bottom:.9rem;
+}
+.headline{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(1.6rem,5vw,2.6rem);
+  line-height:1.2;color:var(--text0);
+  letter-spacing:-.02em;margin-bottom:.7rem;
+}
+.headline em{font-style:normal;color:var(--amber-bright);}
+.lede{
+  font-size:.9rem;color:var(--text1);
+  max-width:58ch;line-height:1.8;
+}
+.lede strong{color:var(--text0);font-weight:500;}
+
+/* ══ SECTION LABEL ══ */
+.sec-label{
+  font-family:var(--mono);font-size:.56rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--amber-bright);
+  padding-top:2.5rem;margin-bottom:1.2rem;
+}
+
+/* ══ TIMELINE ══ */
+.tl{display:flex;flex-direction:column;gap:0;}
+.tl-item{
+  display:grid;
+  grid-template-columns:4.8rem 20px 1fr;
+  gap:0 1.2rem;
+}
+.tl-time{
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--amber-bright);text-align:right;
+  padding-top:.2rem;letter-spacing:.04em;
+  white-space:nowrap;
+}
+.tl-spine{
+  display:flex;flex-direction:column;align-items:center;
+}
+.tl-dot{
+  width:8px;height:8px;border-radius:50%;
+  flex-shrink:0;margin-top:.28rem;
+}
+.tl-dot.amber{background:var(--amber-bright);box-shadow:0 0 0 3px var(--amber-d);}
+.tl-dot.dim{background:var(--text3);box-shadow:0 0 0 3px rgba(255,255,255,.03);}
+.tl-dot.green{background:#3a9e5f;box-shadow:0 0 0 3px rgba(58,158,95,.12);}
+.tl-line{flex:1;width:1px;background:var(--border);margin-top:4px;}
+.tl-item:last-child .tl-line{background:transparent;}
+.tl-body{padding:.1rem 0 2rem;}
+.tl-heading{
+  font-family:var(--serif);font-style:italic;
+  font-size:1rem;color:var(--text0);
+  margin-bottom:.4rem;letter-spacing:-.01em;
+  line-height:1.25;
+}
+.tl-heading em{font-style:normal;color:var(--amber-bright);}
+.tl-prose{font-size:.8rem;color:var(--text1);line-height:1.75;margin-bottom:.6rem;}
+.tl-prose strong{color:var(--text0);font-weight:500;}
+.tl-prose:last-child{margin-bottom:0;}
+
+/* ══ FIELD NOTE ══ */
+.field-note{
+  background:var(--amber-d);
+  border:.5px solid var(--amber-b);
+  border-left:3px solid var(--amber-bright);
+  border-radius:6px;
+  padding:1rem 1.15rem;
+  margin:.8rem 0;
+}
+.fn-label{
+  font-family:var(--mono);font-size:.5rem;
+  letter-spacing:.13em;text-transform:uppercase;
+  color:var(--amber-bright);margin-bottom:.55rem;opacity:.8;
+}
+.fn-body{
+  font-family:var(--serif);font-style:italic;
+  font-size:.92rem;color:var(--text0);
+  line-height:1.65;
+}
+.fn-body em{font-style:normal;font-weight:400;}
+
+/* ══ PIVOT MOMENT ══ */
+.pivot{
+  display:grid;grid-template-columns:1fr 1fr;gap:.6rem;
+  margin:.8rem 0;
+}
+.pivot-card{
+  padding:.75rem .9rem;
+  border:.5px solid var(--border);
+  border-radius:6px;
+  background:rgba(255,255,255,.02);
+}
+.pivot-card.hi{
+  background:var(--amber-d);
+  border-color:var(--amber-b);
+}
+.pc-label{
+  font-family:var(--mono);font-size:.5rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--amber-bright);opacity:.8;margin-bottom:.35rem;
+}
+.pc-text{font-size:.72rem;color:var(--text2);line-height:1.45;}
+.pc-text strong{color:var(--text1);}
+
+/* ══ FEEDBACK CLUSTER ══ */
+.feedback-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:.6rem;margin:.8rem 0;
+}
+.fb-card{
+  padding:.75rem .9rem;
+  border:.5px solid var(--border);
+  border-radius:6px;
+  background:rgba(255,255,255,.02);
+}
+.fb-icon{
+  font-family:var(--mono);font-size:.7rem;
+  color:var(--amber-bright);margin-bottom:.3rem;
+}
+.fb-heading{
+  font-family:var(--mono);font-size:.54rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text2);margin-bottom:.25rem;
+}
+.fb-text{font-size:.72rem;color:var(--text2);line-height:1.45;}
+.fb-text strong{color:var(--text1);}
+
+/* ══ TRAJECTORY ══ */
+.traj{
+  margin:.8rem 0;
+  display:flex;flex-direction:column;gap:0;
+}
+.traj-row{
+  display:grid;grid-template-columns:7rem 1fr;
+  gap:0 1rem;
+  border-bottom:.5px solid var(--border);
+  padding:.65rem 0;
+}
+.traj-row:last-child{border-bottom:none;}
+.traj-when{
+  font-family:var(--mono);font-size:.58rem;
+  color:var(--amber-bright);letter-spacing:.04em;
+  padding-top:.05rem;white-space:nowrap;
+}
+.traj-what{font-size:.775rem;color:var(--text1);line-height:1.6;}
+.traj-what strong{color:var(--text0);font-weight:500;display:block;margin-bottom:.15rem;}
+
+/* ══ EMAIL BLOCK ══ */
+.email-block{
+  background:var(--bg2);
+  border:.5px solid var(--border-md);
+  border-radius:8px;
+  padding:1.1rem 1.3rem;
+  margin:.8rem 0;
+  font-family:var(--mono);
+}
+.email-meta{
+  font-size:.58rem;letter-spacing:.06em;
+  color:var(--text2);margin-bottom:.8rem;
+  border-bottom:.5px solid var(--border);
+  padding-bottom:.6rem;
+}
+.email-meta strong{color:var(--text1);}
+.email-body{
+  font-family:var(--sans);
+  font-size:.8rem;color:var(--text1);
+  line-height:1.7;white-space:pre-wrap;
+}
+.email-body em{color:var(--text2);font-style:normal;font-family:var(--mono);font-size:.72rem;}
+
+/* ══ SIGNAL / AXIOM ══ */
+.axiom{
+  text-align:center;
+  padding:2.5rem 0 1rem;
+  border-top:.5px solid var(--border);
+  margin-top:1.5rem;
+}
+.axiom-main{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(1.1rem,3vw,1.6rem);
+  color:var(--text0);letter-spacing:-.01em;
+  line-height:1.3;margin-bottom:.5rem;
+}
+.axiom-main em{font-style:normal;color:var(--amber-bright);}
+.axiom-sub{
+  font-family:var(--mono);font-size:.58rem;
+  letter-spacing:.1em;color:var(--text2);
+}
+
+/* ══ FOOTER ══ */
+.page-footer{
+  border-top:.5px solid var(--border);
+  padding-top:1.5rem;margin-top:2rem;
+  display:flex;justify-content:space-between;
+  align-items:flex-end;flex-wrap:wrap;gap:.8rem;
+}
+.footer-phrase{
+  font-family:var(--serif);font-style:italic;
+  font-size:.95rem;color:var(--text2);
+}
+.footer-meta{
+  font-family:var(--mono);font-size:.54rem;
+  color:var(--text3);letter-spacing:.05em;text-align:right;
+}
+.footer-meta a{color:var(--amber-bright);text-decoration:none;}
+
+/* ══ DIVIDER ══ */
+hr.div{border:none;border-top:.5px solid var(--border);margin:0;}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:600px){
+  :root{--gut:1.15rem;}
+  .pivot{grid-template-columns:1fr;}
+  .feedback-grid{grid-template-columns:1fr;}
+  .tl-item{grid-template-columns:4rem 16px 1fr;gap:0 .9rem;}
+  .traj-row{grid-template-columns:5.5rem 1fr;}
+  .page-footer{flex-direction:column;align-items:flex-start;}
+  .footer-meta{text-align:left;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo-wrap" aria-hidden="true">
+      <img class="logo-dark"  src="https://abikesa.github.io/logos/assets/ukubona-dark.png"  alt=""/>
+      <img class="logo-light" src="https://abikesa.github.io/logos/assets/ukubona-light.png" alt=""/>
+    </div>
+    <div class="nav-title">
+      Ukubona LLC
+      <span class="nav-sub">· Old Timerz · 27 Jun 2026</span>
+    </div>
+    <button class="theme-btn" id="theme-btn">light</button>
+  </div>
+</nav>
+
+<!-- SIGNAL LINE (ECG of the day) -->
+<div class="signal-container" aria-hidden="true">
+  <svg class="signal-svg" id="signal-svg" viewBox="0 0 760 40" preserveAspectRatio="none">
+    <polyline id="signal-line"
+      points="0,20 60,20 80,20 90,5 100,35 110,20 200,20 210,20 220,8 230,32 240,20 320,20 330,3 345,38 360,20 440,20 450,8 462,34 474,20 560,20 570,5 582,36 594,20 680,20 690,10 700,32 710,20 760,20"
+      fill="none"
+      stroke-width="1.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+  </svg>
+</div>
+
+<div class="outer">
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <p class="eyebrow">Session debrief · Kampala · Saturday 27 June 2026</p>
+    <h1 class="headline">From Mwiri to <em>digital twins</em><br>in one evening.</h1>
+    <p class="lede">
+      The algebra landed. <strong>Kenneth Legesi</strong> took notes on the TMVES compression chain unprompted.
+      The demos proved shipment; the framework gave him something portable.
+      This document captures the arc, the signal, and what comes next.
+    </p>
+  </header>
+
+  <!-- ACT I: BEFORE -->
+  <p class="sec-label">Act I · The preparation</p>
+  <div class="tl">
+
+    <div class="tl-item">
+      <div class="tl-time">Jun 8</div>
+      <div class="tl-spine"><div class="tl-dot dim"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-heading">Fiona's introduction</div>
+        <p class="tl-prose">WhatsApp. "Have your data ready and you pitch to him." The framing assumed allocator mode. The actual register would turn out to be something older and less formal.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">Jun 26</div>
+      <div class="tl-spine"><div class="tl-dot amber"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-heading">The <em>dossier</em> assembled</div>
+        <p class="tl-prose">Four LLM passes — xAI grounding, Google framing, OpenAI conjecture, Anthropic calibration — converged on a single insight: open with a question, not a pitch. Let him define the coordinate system. The five-minute sequence was built and abandoned the moment it became unnecessary.</p>
+        <div class="pivot">
+          <div class="pivot-card hi">
+            <div class="pc-label">What the models agreed on</div>
+            <div class="pc-text">Ask first. <strong>"What would make this conversation useful for you?"</strong> Then route on his answer.</div>
+          </div>
+          <div class="pivot-card">
+            <div class="pc-label">What made it moot</div>
+            <div class="pc-text">S1 Busoga College Mwiri. Same house. Trust already established. Formality collapsed at contact.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="div"/>
+
+  <!-- ACT II: THE ENCOUNTER -->
+  <p class="sec-label">Act II · Old Timerz · 18:00</p>
+  <div class="tl">
+
+    <div class="tl-item">
+      <div class="tl-time">18:00</div>
+      <div class="tl-spine"><div class="tl-dot amber"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-heading">Collapse of <em>register</em></div>
+        <p class="tl-prose">The formal pitch sequence dissolved. Shared history — Mwiri, S1, same house — converted a first meeting into a continuation. What emerged instead was a conversation between two people who already trusted each other's intelligence.</p>
+        <p class="tl-prose">This is the best possible outcome. Trust compressed years of credibility-building into minutes.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">18:xx</div>
+      <div class="tl-spine"><div class="tl-dot amber"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-heading">The <em>signal moment</em></div>
+        <div class="field-note">
+          <div class="fn-label">Field note · verbatim recollection</div>
+          <div class="fn-body">
+            He took notes — feverishly — when the algebra appeared. Not during the demos.
+            Not during the clinical twin. During the <em>TMVES compression chain</em> and the ROYGBIV legibility layer.
+            The framework was the product he wanted to carry away.
+          </div>
+        </div>
+        <p class="tl-prose">The asymmetry this reveals: <strong>demos prove shipment; algebra proves there is something worth internalizing.</strong> Kenneth was not evaluating software. He was testing whether there was a portable mental model beneath it. There was.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">18:xx</div>
+      <div class="tl-spine"><div class="tl-dot amber"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-heading">What was <em>demoed</em></div>
+        <p class="tl-prose">Three environments walked through live:</p>
+        <div class="feedback-grid" style="grid-template-columns:repeat(3,1fr);">
+          <div class="fb-card">
+            <div class="fb-icon">①</div>
+            <div class="fb-heading">Enterprise Twin</div>
+            <div class="fb-text">Jacobian Oracle. Bond yield Δ → FX → fleet equity. Ugandan macroeconomic constraints in a live sensitivity surface.</div>
+          </div>
+          <div class="fb-card">
+            <div class="fb-icon">②</div>
+            <div class="fb-heading">Clinical Twin</div>
+            <div class="fb-text">Polypharmacy Jacobian. Which drug amplifies vs. suppresses the pain gradient. A sovereign health record in motion.</div>
+          </div>
+          <div class="fb-card">
+            <div class="fb-icon">③</div>
+            <div class="fb-heading">HR Twin · MoES</div>
+            <div class="fb-text">Ministry of Education science. The civilizational scale argument made concrete at the federated layer.</div>
+          </div>
+        </div>
+        <p class="tl-prose" style="margin-top:.8rem;"><strong>ROYGBIV key insight delivered:</strong> intelligibility is the product, not intelligence. LLMs are a toggle, not load-bearing. The algebra carries it.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">19:xx</div>
+      <div class="tl-spine"><div class="tl-dot green"></div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-heading">Kenneth's <em>feedback cluster</em></div>
+        <p class="tl-prose">He shifted from evaluator to co-designer. Four actionable vectors, in order of weight:</p>
+        <div class="feedback-grid">
+          <div class="fb-card">
+            <div class="fb-icon">→</div>
+            <div class="fb-heading">Wedge</div>
+            <div class="fb-text"><strong>Focus on medical.</strong> Clinical twin as the B2B entry point. Target clinics and hospitals frustrated with legacy IT vendors. Don't sprawl.</div>
+          </div>
+          <div class="fb-card">
+            <div class="fb-icon">→</div>
+            <div class="fb-heading">Onboarding</div>
+            <div class="fb-text"><strong>Gen Z content creator.</strong> A short video before the math. Frictionless entry is a product decision, not a marketing decision.</div>
+          </div>
+          <div class="fb-card">
+            <div class="fb-icon">→</div>
+            <div class="fb-heading">Sovereignty</div>
+            <div class="fb-text"><strong>Local AWS partners.</strong> He has them. Health data must remain in-country. This is the regulatory unlock for B2B clinical.</div>
+          </div>
+          <div class="fb-card">
+            <div class="fb-icon">→</div>
+            <div class="fb-heading">Network</div>
+            <div class="fb-text"><strong>Wayengera Misaki, Ivan Mwondha</strong>, and others. The introductions are conditional on him exploring the demos first.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="div"/>
+
+  <!-- ACT III: TRAJECTORY -->
+  <p class="sec-label">Act III · Forward trajectory</p>
+
+  <div class="traj">
+    <div class="traj-row">
+      <div class="traj-when">Tonight</div>
+      <div class="traj-what">
+        <strong>Send the email. Write the NDJSON entry. Nothing else.</strong>
+        The follow-up is short, warm, links both environments, defers introductions to him. The next move belongs to Kenneth.
+      </div>
+    </div>
+    <div class="traj-row">
+      <div class="traj-when">Week of Jul 7</div>
+      <div class="traj-what">
+        <strong>Follow-up call or message.</strong>
+        If no response by Wed Jul 9, a single-line check-in: "Did the environments load cleanly?" Nothing more. Give him room to explore on his own terms.
+      </div>
+    </div>
+    <div class="traj-row">
+      <div class="traj-when">Jul–Aug</div>
+      <div class="traj-what">
+        <strong>Onboarding video.</strong> Identify the Gen Z content creator. Script focuses on the scalar output — "77.8% → WATCH" — not the TMVES architecture. The algebra is the moat; the video is the door.
+      </div>
+    </div>
+    <div class="traj-row">
+      <div class="traj-when">Aug–Sep</div>
+      <div class="traj-what">
+        <strong>Local AWS infrastructure conversation.</strong> Kenneth's partners. Health data sovereignty locked in. This is the prerequisite for any serious B2B clinical pilot.
+      </div>
+    </div>
+    <div class="traj-row">
+      <div class="traj-when">Q4 2026</div>
+      <div class="traj-what">
+        <strong>Introductions to Wayengera, Ivan, others.</strong> Conditional on: Kenneth having touched the demos, the AWS conversation having happened, at least one clinic frustration case documented. He becomes connector → potential co-designer of the capital raise structure.
+      </div>
+    </div>
+    <div class="traj-row">
+      <div class="traj-when">2027</div>
+      <div class="traj-what">
+        <strong>B2B clinical pilot.</strong> One clinic. One frustrated IT buyer. The clinical twin as a live production system in a Ugandan medical setting. This is the first paying customer scenario.
+      </div>
+    </div>
+  </div>
+
+  <hr class="div"/>
+
+  <!-- THE EMAIL -->
+  <p class="sec-label">Tonight · the follow-up</p>
+  <p style="font-size:.8rem;color:var(--text2);margin-bottom:.9rem;line-height:1.7;">Send this. Fill in the two links and the credentials. Do not add to it.</p>
+
+  <div class="email-block">
+    <div class="email-meta">
+      <strong>To:</strong> Kenneth Legesi &nbsp;·&nbsp;
+      <strong>Subject:</strong> The demos — as promised
+    </div>
+    <div class="email-body">Kenneth,
+
+Mwiri to digital twins in one evening — that was a good night.
+
+Your feedback was clarifying: wedge hard on clinical, make onboarding frictionless before the math, keep data local. Moving on all three.
+
+As promised —
+
+Clinical Twin
+<em>[link]</em>
+Start on the Matrix tab. The polypharmacy Jacobian shows which drugs amplify versus suppress the pain gradient. LLMs are optional; the matrix remains interpretable either way.
+
+Enterprise Twin
+<em>[link]</em>
+Matrix tab again. Bond yield Δ → FX → fleet equity sensitivity surface. Intelligibility as the product.
+
+Credentials: <em>[token / access]</em>
+
+Happy to reconnect around Wayengera, Ivan, and others when it feels useful.
+
+Abimereki</div>
+  </div>
+
+  <!-- AXIOM -->
+  <div class="axiom">
+    <div class="axiom-main">
+      The note-taking was the signal.<br>
+      He did not evaluate the software.<br>
+      He tested whether there was something <em>worth carrying away.</em>
+    </div>
+    <div class="axiom-sub" style="margin-top:.8rem;">There was. · θᵗ = Σ Eventᵢ</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <div class="footer-phrase">Okubala si Kulaba.</div>
+    <div class="footer-meta">
+      <a href="https://ukubona-llc.github.io">ukubona-llc.github.io</a><br>
+      Kampala · 27 Jun 2026
+    </div>
+  </div>
+
+</div><!-- /outer -->
+
+<script>
+/* Theme toggle */
+(function(){
+  var html = document.documentElement;
+  var btn  = document.getElementById('theme-btn');
+  function apply(t){
+    html.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? 'light' : 'dark';
+  }
+  btn.addEventListener('click', function(){
+    apply(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  apply('dark');
+})();
+
+/* Signal line colour from CSS var */
+(function(){
+  var line = document.getElementById('signal-line');
+  function setColor(){
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    line.setAttribute('stroke', isDark ? '#c8921a' : '#8a5e08');
+    line.setAttribute('stroke-opacity', isDark ? '0.55' : '0.40');
+  }
+  setColor();
+  document.getElementById('theme-btn').addEventListener('click', function(){
+    setTimeout(setColor, 10);
+  });
+})();
+</script>
+
+</body>
+</html>
